@@ -1,243 +1,615 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RADOR Designs — Graphic Designer & Visual Storyteller</title>
-  <!-- External CSS -->
-  <link rel="stylesheet" href="style.css">
-  <!-- Tailwind + Iconify + Fonts -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { 'inter': ['Inter', 'sans-serif'] },
-          colors: {
-            neon: '#00ff88',
-            dark: { 900: '#0a0a0a', 800: '#111111', 700: '#1a1a1a', 600: '#222222' }
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RADOR Designs — Graphic Designer & Visual Storyteller</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: { 
+                extend: { 
+                    fontFamily: { 'inter': ['Inter', 'sans-serif'] }, 
+                    colors: { neon: '#00ff88', dark: { 900: '#0a0a0a', 800: '#111', 700: '#1a1a1a' } } 
+                } 
+            }
         }
-      }
-    }
-  </script>
+    </script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-[#0a0a0a] text-white grid-bg overflow-x-hidden">
 
-  <!-- Custom Cursor -->
-  <div class="cursor-dot hidden lg:block" id="cursorDot"></div>
-  <div class="cursor-ring hidden lg:block" id="cursorRing"></div>
+<div class="cursor-dot hidden lg:block" id="cursorDot"></div>
+<div class="cursor-ring hidden lg:block" id="cursorRing"></div>
 
-  <!-- ==================== NAVIGATION ==================== -->
-  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose"> ✕ </button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lbNext">›</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-info">
+        <div class="lightbox-cat" id="lightboxCat"></div>
+        <div class="lightbox-title" id="lightboxTitle"></div>
+    </div>
+</div>
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <a href="#home" class="flex items-center gap-2 group">
-          <div class="w-10 h-10 rounded-xl bg-[#00ff88] flex items-center justify-center text-black font-black text-lg group-hover:shadow-lg group-hover:shadow-[#00ff88]/25 transition-all duration-300">R</div>
-          <span class="text-xl font-bold tracking-tight">RADOR<span class="text-[#00ff88]">.</span></span>
-        </a>
-        <div class="hidden md:flex items-center gap-10">
-          <a href="#home" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">HOME</a>
-          <a href="#about" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">ABOUT</a>
-          <a href="#projects" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">PROJECTS</a>
-          <a href="#contact" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">CONTACT</a>
+        <div class="flex items-center justify-between h-20">
+            <a href="#home" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 rounded-xl bg-[#00ff88] flex items-center justify-center text-black font-black text-lg group-hover:shadow-lg group-hover:shadow-[#00ff88]/25 transition-all duration-300">R</div>
+                <span class="text-xl font-bold tracking-tight">RADOR<span class="text-[#00ff88]">.</span></span>
+            </a>
+            <div class="hidden md:flex items-center gap-10">
+                <a href="#home" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors active">HOME</a>
+                <a href="#about" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">ABOUT</a>
+                <a href="#projects" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">PROJECTS</a>
+                <a href="#contact" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">CONTACT</a>
+            </div>
+            <div class="hidden md:flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 bg-[#00ff88] rounded-full pulse-dot"></span>
+                    <span class="text-xs text-[#00ff88] font-medium">Available</span>
+                </div>
+                <a href="#contact" class="px-6 py-2.5 bg-[#00ff88] text-black text-sm font-bold rounded-full hover:bg-[#00cc6a] transition-all duration-300 hover:shadow-lg hover:shadow-[#00ff88]/25">Hire Me</a>
+            </div>
+            <button id="mobileBtn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50">
+                <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="l1"></span>
+                <span class="w-6 h-0.5 bg-white transition-all duration-300" id="l2"></span>
+                <span class="w-4 h-0.5 bg-white transition-all duration-300 ml-auto origin-center" id="l3"></span>
+            </button>
         </div>
-        <div class="hidden md:flex items-center gap-4">
-          <div class="flex items-center gap-2"><span class="w-2 h-2 bg-[#00ff88] rounded-full pulse-dot"></span><span class="text-xs text-[#00ff88] font-medium">Available</span></div>
-          <a href="#contact" class="px-6 py-2.5 bg-[#00ff88] text-black text-sm font-bold rounded-full hover:bg-[#00cc6a] transition-all">Hire Me</a>
-        </div>
-        <button id="mobileBtn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50">
-          <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="l1"></span>
-          <span class="w-6 h-0.5 bg-white transition-all duration-300" id="l2"></span>
-          <span class="w-4 h-0.5 bg-white transition-all duration-300 ml-auto origin-center" id="l3"></span>
-        </button>
-      </div>
     </div>
     <div id="mobileMenu" class="md:hidden fixed inset-0 bg-[#0a0a0a]/98 backdrop-blur-xl z-40 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500">
-      <div class="flex flex-col items-center gap-8">
-        <a href="#home" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">HOME</a>
-        <a href="#about" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">ABOUT</a>
-        <a href="#projects" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">PROJECTS</a>
-        <a href="#contact" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">CONTACT</a>
-        <a href="#contact" class="mt-4 px-8 py-3 bg-[#00ff88] text-black font-bold rounded-full text-lg">Hire Me</a>
-      </div>
+        <div class="flex flex-col items-center gap-8">
+            <a href="#home" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">HOME</a>
+            <a href="#about" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">ABOUT</a>
+            <a href="#projects" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">PROJECTS</a>
+            <a href="#contact" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">CONTACT</a>
+            <a href="#contact" class="mt-4 px-8 py-3 bg-[#00ff88] text-black font-bold rounded-full text-lg">Hire Me</a>
+        </div>
     </div>
-  </nav>
+</nav>
 
-  <!-- ==================== HERO SECTION (unchanged) ==================== -->
-  <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none"><div class="text-outline text-[20vw] font-black tracking-tighter whitespace-nowrap opacity-20">RADOR</div></div>
+<section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+    <div class="absolute inset-0">
+        <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#00ff88]/5 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#00ff88]/3 rounded-full blur-[100px]"></div>
+    </div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
+        <div class="text-outline text-[20vw] font-black tracking-tighter whitespace-nowrap opacity-20">RADOR</div>
+    </div>
     <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20 relative z-10">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        <div>
-          <div class="reveal" style="transition-delay:0.1s"><div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00ff88]/20 bg-[#00ff88]/5 mb-8"><span class="w-2 h-2 bg-[#00ff88] rounded-full pulse-dot"></span><span class="text-xs font-semibold text-[#00ff88] tracking-wider uppercase">Graphic Designer</span></div></div>
-          <h1 class="reveal text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.95] tracking-tight mb-4" style="transition-delay:0.2s">It's<br><span class="text-gradient glow-green">RADOR</span></h1>
-          <p class="reveal text-xl sm:text-2xl font-light text-neutral-400 mb-4" style="transition-delay:0.3s">Graphic Designer <span class="text-white font-medium">Visual Storyteller</span></p>
-          <p class="reveal text-neutral-500 font-light leading-relaxed max-w-lg mb-10" style="transition-delay:0.35s">Specializing in poster design, visual branding, social media creative, and Canva design. I transform ideas into impactful visuals that tell your story.</p>
-          <div class="reveal flex flex-wrap gap-3 mb-10" style="transition-delay:0.4s"><span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Poster Design</span><span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Visual Branding</span><span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Social Media</span><span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Canva Pro</span></div>
-          <div class="reveal flex flex-wrap gap-4" style="transition-delay:0.45s"><a href="#projects" class="group inline-flex items-center gap-3 px-8 py-4 bg-[#00ff88] text-black font-bold rounded-full hover:bg-[#00cc6a] transition-all hover:shadow-xl">VIEW PROJECTS <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="18"></span></a><a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 border border-neutral-700 hover:border-[#00ff88]/50 text-white font-medium rounded-full transition-all">Contact <span class="iconify" data-icon="lucide:message-circle" data-width="18"></span></a></div>
-          <div class="reveal flex items-center gap-5 mt-12" style="transition-delay:0.5s"><span class="text-xs text-neutral-600 tracking-wider uppercase">Follow</span><div class="w-8 h-px bg-neutral-700"></div><a href="#" class="text-neutral-500 hover:text-[#00ff88]"><span class="iconify" data-icon="simple-icons:facebook" data-width="18"></span></a><a href="#" class="text-neutral-500 hover:text-[#00ff88]"><span class="iconify" data-icon="simple-icons:instagram" data-width="18"></span></a><a href="#" class="text-neutral-500 hover:text-[#00ff88]"><span class="iconify" data-icon="simple-icons:linkedin" data-width="18"></span></a><a href="#" class="text-neutral-500 hover:text-[#00ff88]"><span class="iconify" data-icon="simple-icons:dribbble" data-width="18"></span></a></div>
-        </div>
-        <div class="reveal-right relative"><div class="relative"><div class="relative rounded-3xl overflow-hidden border border-neutral-800 bg-neutral-900/50 p-3"><div class="grid grid-cols-2 gap-3"><div class="relative rounded-2xl overflow-hidden aspect-square group"><img src="https://picsum.photos/id/106/600/600" alt="Poster" class="w-full h-full object-cover project-img transition-transform duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4"><span class="text-xs font-bold text-[#00ff88]">POSTERS</span></div></div><div class="relative rounded-2xl overflow-hidden aspect-square group"><img src="https://picsum.photos/id/107/600/600" alt="Brand" class="w-full h-full object-cover project-img transition-transform duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4"><span class="text-xs font-bold text-[#00ff88]">BRANDING</span></div></div><div class="relative rounded-2xl overflow-hidden aspect-square group"><img src="https://picsum.photos/id/155/600/600" alt="Futbol" class="w-full h-full object-cover project-img transition-transform duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4"><span class="text-xs font-bold text-[#00ff88]">FUTBOL</span></div></div><div class="relative rounded-2xl overflow-hidden aspect-square group bg-gradient-to-br from-[#00ff88]/10 to-[#00cc6a]/5 flex items-center justify-center"><div class="text-center"><div class="w-20 h-20 rounded-2xl bg-[#00ff88]/20 flex items-center justify-center mx-auto mb-3"><span class="text-4xl font-black text-[#00ff88]">R</span></div><span class="text-xs font-bold text-[#00ff88]">LOGO</span></div></div></div></div><div class="absolute -top-4 -right-4 bg-[#0a0a0a] border border-[#00ff88]/30 rounded-2xl px-4 py-3 float glow-box"><div class="flex items-center gap-2"><span class="iconify text-[#00ff88]" data-icon="lucide:sparkles" data-width="16"></span><span class="text-xs font-bold text-[#00ff88]">50+ Projects</span></div></div><div class="absolute -bottom-4 -left-4 bg-[#0a0a0a] border border-[#00ff88]/30 rounded-2xl px-4 py-3 float-d1 glow-box"><div class="flex items-center gap-2"><span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span><span class="text-xs font-bold">5.0 Rating</span></div></div></div></div>
-      </div>
-    </div>
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"><span class="text-[10px] text-neutral-600 tracking-[0.3em] uppercase">Scroll Down</span><div class="w-5 h-8 rounded-full border border-neutral-700 flex justify-center pt-1.5"><div class="w-1 h-2 bg-[#00ff88] rounded-full animate-bounce"></div></div></div>
-  </section>
-
-  <!-- Marquee -->
-  <div class="py-6 border-y border-neutral-800/50 overflow-hidden bg-[#00ff88]/[0.02]"><div class="flex whitespace-nowrap marquee-track"><span class="text-4xl font-black text-neutral-800 mx-8">LOGO</span><span class="text-[#00ff88] mx-3">◆</span><span class="text-4xl font-black text-neutral-800 mx-8">FUTBOL</span><span class="text-[#00ff88] mx-3">◆</span><span class="text-4xl font-black text-neutral-800 mx-8">FILMATIC</span><span class="text-[#00ff88] mx-3">◆</span><span class="text-4xl font-black text-neutral-800 mx-8">POSTER DESIGN</span><span class="text-[#00ff88] mx-3">◆</span><span class="text-4xl font-black text-neutral-800 mx-8">SOCIAL MEDIA</span><span class="text-[#00ff88] mx-3">◆</span><span class="text-4xl font-black text-neutral-800 mx-8">LOGO</span><span class="text-[#00ff88] mx-3">◆</span><span class="text-4xl font-black text-neutral-800 mx-8">FUTBOL</span><span class="text-[#00ff88] mx-3">◆</span><span class="text-4xl font-black text-neutral-800 mx-8">FILMATIC</span><span class="text-[#00ff88] mx-3">◆</span></div></div>
-
-  <!-- ==================== ABOUT SECTION (updated) ==================== -->
-  <section id="about" class="py-24 lg:py-32 relative">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-16 items-start">
-        <!-- Left Column: Image + short bio -->
-        <div class="reveal-left relative">
-          <div class="relative">
-            <div class="relative rounded-3xl overflow-hidden aspect-[3/4] max-w-md mx-auto">
-              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Rodshi Ador" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60"></div>
-            </div>
-            <div class="absolute -inset-4 rounded-3xl border border-[#00ff88]/10 pointer-events-none float-d1"></div>
-            <div class="absolute -bottom-6 -right-6 bg-[#00ff88] rounded-2xl p-5 float">
-              <div class="text-3xl font-black text-black">3+</div>
-              <div class="text-xs font-bold text-black/70">Years Exp.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column: About Me + Work Experience + Field of Study -->
-        <div>
-          <span class="reveal text-xs font-bold text-[#00ff88] tracking-[0.3em] uppercase">About Me</span>
-          <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">Creative Designer<br><span class="text-gradient">Visual Storyteller</span></h2>
-          <p class="reveal text-neutral-400 font-light leading-relaxed mb-6">I'm <strong class="text-white">Rodshi Ador</strong>, a passionate graphic designer dedicated to crafting impactful visual experiences. From bold logos to cinematic posters, I bring ideas to life with creativity and precision.</p>
-          
-          <!-- Work Experience Section -->
-          <div class="reveal mt-8 mb-8">
-            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><span class="iconify text-[#00ff88]" data-icon="lucide:briefcase" data-width="22"></span> Work Experience</h3>
-            <div class="space-y-4">
-              <div class="p-4 rounded-xl border border-neutral-800 bg-neutral-900/30">
-                <div class="flex justify-between items-start">
-                  <div>
-                    <h4 class="font-bold text-[#00ff88]">Social Media Manager</h4>
-                    <p class="text-sm text-neutral-400">Creative content strategy, visual branding, and engagement campaigns.</p>
-                  </div>
-                  <span class="text-xs text-neutral-500">2022 – Present</span>
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div>
+                <div class="reveal" style="transition-delay:.1s">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00ff88]/20 bg-[#00ff88]/5 mb-8">
+                        <span class="w-2 h-2 bg-[#00ff88] rounded-full pulse-dot"></span>
+                        <span class="text-xs font-semibold text-[#00ff88] tracking-wider uppercase">Graphic Designer</span>
+                    </div>
                 </div>
-              </div>
-              <div class="p-4 rounded-xl border border-neutral-800 bg-neutral-900/30">
-                <div class="flex justify-between items-start">
-                  <div>
-                    <h4 class="font-bold text-[#00ff88]">Social Media Analyst</h4>
-                    <p class="text-sm text-neutral-400">Data-driven design optimization, trend analysis, and audience growth.</p>
-                  </div>
-                  <span class="text-xs text-neutral-500">2020 – 2022</span>
+                <h1 class="reveal text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[.95] tracking-tight mb-4" style="transition-delay:.2s">It's<br><span class="text-gradient glow-green">RADOR</span></h1>
+                <p class="reveal text-xl sm:text-2xl font-light text-neutral-400 mb-4" style="transition-delay:.3s">Graphic Designer &<br><span class="text-white font-medium">Visual Storyteller</span></p>
+                <p class="reveal text-neutral-500 font-light leading-relaxed max-w-lg mb-10" style="transition-delay:.35s">Specializing in poster design, sports graphics, cricket & football visuals, music covers, and creative designs.</p>
+                <div class="reveal flex flex-wrap gap-3 mb-10" style="transition-delay:.4s">
+                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Poster</span>
+                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Cricket</span>
+                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Football</span>
+                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Music</span>
+                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Festival</span>
                 </div>
-              </div>
+                <div class="reveal flex flex-wrap gap-4" style="transition-delay:.45s">
+                    <a href="#projects" class="group inline-flex items-center gap-3 px-8 py-4 bg-[#00ff88] text-black font-bold rounded-full hover:bg-[#00cc6a] transition-all duration-300 hover:shadow-xl hover:shadow-[#00ff88]/25 hover:-translate-y-0.5">VIEW PROJECTS <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="18"></span></a>
+                    <a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 border border-neutral-700 hover:border-[#00ff88]/50 text-white font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5">Contact <span class="iconify" data-icon="lucide:message-circle" data-width="18"></span></a>
+                </div>
+                <div class="reveal flex items-center gap-5 mt-12" style="transition-delay:.5s">
+                    <span class="text-xs text-neutral-600 tracking-wider uppercase">Follow</span>
+                    <div class="w-8 h-px bg-neutral-700"></div>
+                    <a href="https://www.facebook.com/rador009" target="_blank" class="text-neutral-500 hover:text-[#00ff88] transition-colors"><span class="iconify" data-icon="simple-icons:facebook" data-width="18"></span></a>
+                    <a href="#" class="text-neutral-500 hover:text-[#00ff88] transition-colors"><span class="iconify" data-icon="simple-icons:instagram" data-width="18"></span></a>
+                    <a href="#" class="text-neutral-500 hover:text-[#00ff88] transition-colors"><span class="iconify" data-icon="simple-icons:linkedin" data-width="18"></span></a>
+                </div>
             </div>
-          </div>
-
-          <!-- Field of Study -->
-          <div class="reveal">
-            <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2"><span class="iconify text-[#00ff88]" data-icon="lucide:graduation-cap" data-width="22"></span> Field of Study</h3>
-            <div class="p-4 rounded-xl border border-neutral-800 bg-neutral-900/30">
-              <p class="text-neutral-300">Bachelor of Fine Arts in Graphic Design – <span class="text-[#00ff88]">Visual Communication & Branding</span></p>
+            <div class="reveal-right relative">
+                <div class="relative">
+                    <div class="relative rounded-3xl overflow-hidden border border-neutral-800 bg-neutral-900/50 p-3">
+                        <div class="grid grid-cols-3 gap-2.5">
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(0)"><img src="https://z-cdn-media.chatglm.cn/files/82170c06-3172-4881-b6c0-3d9559f0765c.jpg?auth_key=1880456908-59a3a6cb0d0b4fb09eb0e3436485fb7a-0-f7e81e5416a0431239ef5d5a34f2925f" alt="Maradona" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">MARADONA</span></div></div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(2)"><img src="https://z-cdn-media.chatglm.cn/files/5ebf2ecb-9cec-4cb4-86e6-e1b23bbaeb38.jpg?auth_key=1880460163-cc5415da00094971be2ba86d9086792f-0-076cdff35d2c8f11d065ed2b864c4cbb" alt="Spurs vs Man City" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">EPL</span></div></div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(3)"><img src="https://z-cdn-media.chatglm.cn/files/ffa44ea4-bc3b-4c30-9593-7863523b7ca7.jpg?auth_key=1880460163-8a2a122d350d43cbbdda034594d05ef4-0-d9c4d5a02da402078afa3f72ba87affe" alt="Reus" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">REUS</span></div></div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(6)"><img src="https://z-cdn-media.chatglm.cn/files/93cbb3e4-6dd5-4fb7-9177-e979863ddb77" alt="Cricket" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">CRICKET</span></div></div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(7)"><img src="Film Review.jpg" alt="Film Review" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">FILM</span></div></div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(4)"><img src="https://z-cdn-media.chatglm.cn/files/49b76a0d-080e-470d-8011-4ebcbc47c8a0.jpg?auth_key=1880460163-db5fe1902b034f2b819e360791beb62a-0-306b9b1e9c09e357cc04241aa8029f09" alt="Mbappe" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">MBAPPÉ</span></div></div>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 bg-[#0a0a0a] border border-[#00ff88]/30 rounded-2xl px-4 py-3 opacity-90 glow-box">
+                        <div class="flex items-center gap-2"><span class="iconify text-[#00ff88]" data-icon="lucide:sparkles" data-width="16"></span><span class="text-xs font-bold text-[#00ff88]">25 Projects</span></div>
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-[#0a0a0a] border border-[#00ff88]/30 rounded-2xl px-4 py-3 opacity-90 glow-box">
+                        <div class="flex items-center gap-2"><span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span><span class="text-xs font-bold">5.0 Rating</span></div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <!-- Stats (optional, kept) -->
-          <div class="reveal grid grid-cols-3 gap-4 mt-10">
-            <div class="text-center p-3 rounded-xl border border-neutral-800 bg-neutral-900/30"><div class="text-2xl font-black text-[#00ff88] counter" data-target="50">0</div><div class="text-xs text-neutral-500">Projects</div></div>
-            <div class="text-center p-3 rounded-xl border border-neutral-800 bg-neutral-900/30"><div class="text-2xl font-black text-[#00ff88] counter" data-target="30">0</div><div class="text-xs text-neutral-500">Clients</div></div>
-            <div class="text-center p-3 rounded-xl border border-neutral-800 bg-neutral-900/30"><div class="text-2xl font-black text-[#00ff88] counter" data-target="3">0</div><div class="text-xs text-neutral-500">Years</div></div>
-          </div>
         </div>
-      </div>
     </div>
-  </section>
-  <div class="divider max-w-7xl mx-auto"></div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        <span class="text-[10px] text-neutral-600 tracking-[.3em] uppercase">Scroll Down</span>
+        <div class="w-5 h-8 rounded-full border border-neutral-700 flex justify-center pt-1.5">
+            <div class="w-1 h-2 bg-[#00ff88] rounded-full animate-bounce"></div>
+        </div>
+    </div>
+</section>
 
-  <!-- ==================== PROJECTS SECTION (updated with Logo, FUTBOL, FILMATIC) ==================== -->
-  <section id="projects" class="py-24 lg:py-32">
+<div class="py-6 border-y border-neutral-800/50 overflow-hidden bg-[#00ff88]/[.02]">
+    <div class="flex whitespace-nowrap marquee-track">
+        <span class="text-4xl font-black text-neutral-800 mx-8">FOOTBALL POSTER</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">CRICKET GRAPHICS</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">MATCH DAY</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">MUSIC COVER</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">SPORTS DESIGN</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">FESTIVAL</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">FOOTBALL POSTER</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">CRICKET GRAPHICS</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">MATCH DAY</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">MUSIC COVER</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">SPORTS DESIGN</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+        <span class="text-4xl font-black text-neutral-800 mx-8">FESTIVAL</span><span class="text-[#00ff88] mx-3"> ◆ </span>
+    </div>
+</div>
+
+<section id="about" class="py-24 lg:py-32 relative">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="reveal text-xs font-bold text-[#00ff88] tracking-[0.3em] uppercase">Portfolio</span>
-        <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">Featured <span class="text-gradient">Projects</span></h2>
-      </div>
-      <div class="reveal flex flex-wrap justify-center gap-3 mb-12">
-        <button class="filter-btn active px-5 py-2 text-sm font-bold rounded-full border border-[#00ff88]/30 bg-[#00ff88] text-black" data-filter="all">All</button>
-        <button class="filter-btn px-5 py-2 text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white" data-filter="logo">Logo</button>
-        <button class="filter-btn px-5 py-2 text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white" data-filter="futbol">FUTBOL</button>
-        <button class="filter-btn px-5 py-2 text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white" data-filter="filmatic">FILMATIC</button>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid">
-        <!-- Logo Project -->
-        <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="logo">
-          <div class="relative aspect-[16/10] overflow-hidden">
-            <div class="project-img w-full h-full bg-gradient-to-br from-[#00ff88]/10 via-neutral-900 to-[#00cc6a]/5 flex items-center justify-center">
-              <div class="text-center"><div class="w-24 h-24 rounded-2xl bg-[#00ff88]/20 flex items-center justify-center mx-auto"><span class="text-5xl font-black text-[#00ff88]">R</span></div><h3 class="text-xl font-bold mt-3">Logo</h3></div>
+        <div class="grid lg:grid-cols-2 gap-16 items-start">
+            <div class="reveal-left relative sticky top-28">
+                <div class="relative rounded-3xl overflow-hidden aspect-[3/4] max-w-md mx-auto">
+                    <img src="9b6d1473-5558-4b2f-ade6-4beef5b97ea1.jpg" alt="Ador" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60"></div>
+                </div>
+                <div class="absolute -inset-4 rounded-3xl border border-[#00ff88]/10 pointer-events-none"></div>
+                <div class="absolute -bottom-6 -right-6 bg-[#00ff88] rounded-2xl p-5 shadow-xl">
+                    <div class="text-3xl font-black text-black">3+</div>
+                    <div class="text-xs font-bold text-black/70">Years Exp.</div>
+                </div>
             </div>
-            <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/80 backdrop-blur-sm flex items-center justify-center"><div class="text-center"><span class="iconify text-[#00ff88] mb-2" data-icon="lucide:external-link" data-width="28"></span><p class="text-white font-bold">View Project</p></div></div>
-          </div>
-          <div class="p-5"><h3 class="text-lg font-bold">Logo</h3><p class="text-sm text-neutral-500">Brand identity & mark design</p></div>
-        </div>
-        <!-- FUTBOL Project -->
-        <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="futbol">
-          <div class="relative aspect-[16/10] overflow-hidden">
-            <div class="project-img w-full h-full bg-gradient-to-br from-red-900/80 to-amber-900/40 flex items-center justify-center">
-              <div class="text-center"><div class="text-6xl mb-2">⚽</div><h3 class="text-3xl font-black text-white">FUTBOL</h3><p class="text-sm text-[#00ff88] font-semibold">Match Day Posters</p></div>
-            </div>
-            <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/80 backdrop-blur-sm flex items-center justify-center"><div class="text-center"><span class="iconify text-[#00ff88] mb-2" data-icon="lucide:external-link" data-width="28"></span><p class="text-white font-bold">View Project</p></div></div>
-          </div>
-          <div class="p-5"><h3 class="text-lg font-bold">FUTBOL</h3><p class="text-sm text-neutral-500">Football match graphics & posters</p></div>
-        </div>
-        <!-- FILMATIC Project -->
-        <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="filmatic">
-          <div class="relative aspect-[16/10] overflow-hidden">
-            <div class="project-img w-full h-full bg-gradient-to-br from-purple-900/70 via-indigo-900/50 to-neutral-900 flex items-center justify-center">
-              <div class="text-center"><div class="text-6xl mb-2">🎬</div><h3 class="text-3xl font-black text-white">FILMATIC</h3><p class="text-sm text-[#00ff88] font-semibold">Cinematic Posters</p></div>
-            </div>
-            <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/80 backdrop-blur-sm flex items-center justify-center"><div class="text-center"><span class="iconify text-[#00ff88] mb-2" data-icon="lucide:external-link" data-width="28"></span><p class="text-white font-bold">View Project</p></div></div>
-          </div>
-          <div class="p-5"><h3 class="text-lg font-bold">FILMATIC</h3><p class="text-sm text-neutral-500">Film & event poster series</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <div class="divider max-w-7xl mx-auto"></div>
+            <div>
+                <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">About Me</span>
+                <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">Cinematic Storytelling<br><span class="text-gradient">Through Design</span></h2>
+                
+                <p class="reveal text-neutral-300 font-normal leading-relaxed mb-4">
+                    I’m <strong class="text-white font-semibold">Ador</strong>, an EEE student and visual designer based in Dhaka, passionate about cinematic storytelling through design. My work focuses on poster design, sports media visuals, and editorial-style digital creatives that combine emotion, typography, and strong composition.
+                </p>
+                <p class="reveal text-neutral-400 font-light leading-relaxed mb-4">
+                    Over time, I’ve worked with football and cricket-based media platforms such as <strong class="text-white font-medium">Futbol</strong> and <strong class="text-white font-medium">Howzat</strong>, creating engaging social media visuals designed to capture energy, narrative, and audience attention. I currently serve as the <strong class="text-[#00ff88] font-medium">Design Head at RADS</strong>, contributing to the visual direction and branding of the platform through modern, aesthetically driven design solutions.
+                </p>
+                <p class="reveal text-neutral-400 font-light leading-relaxed mb-8">
+                    Beyond design, my background in Electrical and Electronic Engineering helps shape a structured and analytical approach to creativity — balancing visual experimentation with purposeful design thinking.
+                </p>
 
-  <!-- ==================== CONTACT SECTION (unchanged but included) ==================== -->
-  <section id="contact" class="py-24 lg:py-32">
+                <div class="reveal mt-12 pt-8 border-t border-neutral-900">
+                    <h3 class="text-xs font-bold text-neutral-500 tracking-[.2em] uppercase mb-5">Work Experience</h3>
+                    <div class="space-y-3">
+                        <a href="https://www.facebook.com/profile.php?id=61565358908332" target="_blank" class="experience-box block p-4 rounded-2xl border border-neutral-900 bg-neutral-900/20 flex items-center justify-between group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 group-hover:text-[#00ff88] group-hover:border-[#00ff88]/30 transition-colors">
+                                    <span class="iconify" data-icon="lucide:sparkles" data-width="20"></span>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white group-hover:text-[#00ff88] transition-colors">Futbol</h4>
+                                    <p class="text-xs text-neutral-500 mt-0.5">Media Visuals & Graphics</p>
+                                </div>
+                            </div>
+                            <span class="iconify text-neutral-600 group-hover:text-[#00ff88] group-hover:translate-x-1 transition-all" data-icon="lucide:arrow-up-right" data-width="16"></span>
+                        </a>
+
+                        <a href="https://www.facebook.com/profile.php?id=100092842401856" target="_blank" class="experience-box block p-4 rounded-2xl border border-neutral-900 bg-neutral-900/20 flex items-center justify-between group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400 group-hover:text-[#00ff88] group-hover:border-[#00ff88]/30 transition-colors">
+                                    <span class="iconify" data-icon="lucide:trophy" data-width="20"></span>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white group-hover:text-[#00ff88] transition-colors">Howzat</h4>
+                                    <p class="text-xs text-neutral-500 mt-0.5">Cricket Media Layouts</p>
+                                </div>
+                            </div>
+                            <span class="iconify text-neutral-600 group-hover:text-[#00ff88] group-hover:translate-x-1 transition-all" data-icon="lucide:arrow-up-right" data-width="16"></span>
+                        </a>
+
+                        <a href="https://www.facebook.com/profile.php?id=100092842401856" target="_blank" class="experience-box block p-4 rounded-2xl border border-neutral-900 bg-neutral-900/20 flex items-center justify-between group">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-[#00ff88]/10 border border-[#00ff88]/20 flex items-center justify-center text-[#00ff88]">
+                                    <span class="iconify" data-icon="lucide:crown" data-width="20"></span>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-bold text-white group-hover:text-[#00ff88] transition-colors">RADS</h4>
+                                    <p class="text-xs text-[#00ff88] font-medium mt-0.5">Design Head</p>
+                                </div>
+                            </div>
+                            <span class="iconify text-neutral-600 group-hover:text-[#00ff88] group-hover:translate-x-1 transition-all" data-icon="lucide:arrow-up-right" data-width="16"></span>
+                        </a>
+                    </div>
+                    
+                    <div class="mt-6 flex items-center justify-between px-2">
+                        <span class="text-[11px] text-neutral-600 font-medium">Connect on Facebook</span>
+                        <a href="https://www.facebook.com/rador009" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-400 hover:text-[#00ff88] transition-colors">
+                            @rador009 <span class="iconify" data-icon="simple-icons:facebook" data-width="12"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-32">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">What I Do</span>
+                <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">My <span class="text-gradient">Services</span></h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
+                <div class="reveal card-hover p-8 rounded-2xl border border-neutral-800 bg-neutral-900/30 group">
+                    <div class="w-14 h-14 rounded-2xl bg-[#00ff88]/10 flex items-center justify-center mb-6 group-hover:bg-[#00ff88]/20 transition-colors">
+                        <span class="iconify text-[#00ff88]" data-icon="lucide:image" data-width="28"></span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Poster Design</h3>
+                    <p class="text-neutral-400 font-light text-sm">Eye-catching poster designs for sports, automotive, music, film, and campaigns.</p>
+                </div>
+                <div class="reveal card-hover p-8 rounded-2xl border border-neutral-800 bg-neutral-900/30 group">
+                    <div class="w-14 h-14 rounded-2xl bg-[#00ff88]/10 flex items-center justify-center mb-6 group-hover:bg-[#00ff88]/20 transition-colors">
+                        <span class="iconify text-[#00ff88]" data-icon="lucide:trophy" data-width="28"></span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cricket Graphics</h3>
+                    <p class="text-neutral-400 font-light text-sm">Squad announcements, match day, signing alerts & match result graphics.</p>
+                </div>
+                <div class="reveal card-hover p-8 rounded-2xl border border-neutral-800 bg-neutral-900/30 group">
+                    <div class="w-14 h-14 rounded-2xl bg-[#00ff88]/10 flex items-center justify-center mb-6 group-hover:bg-[#00ff88]/20 transition-colors">
+                        <span class="iconify text-[#00ff88]" data-icon="lucide:circle-dot" data-width="28"></span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Football Visuals</h3>
+                    <p class="text-neutral-400 font-light text-sm">Match day concepts, player profiles, line-ups, and transfer graphics.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-16 items-center mt-32">
+            <div>
+                <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">Skills & <span class="text-gradient">Tools</span></h2>
+                <div class="space-y-7">
+                    <div class="reveal">
+                        <div class="flex justify-between mb-2"><span class="text-sm font-bold">Canva Pro</span><span class="text-sm font-bold text-[#00ff88]">98%</span></div>
+                        <div class="h-2 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-fill h-full bg-gradient-to-r from-[#00ff88] to-[#00cc6a] rounded-full" style="--w:98%"></div></div>
+                    </div>
+                    <div class="reveal">
+                        <div class="flex justify-between mb-2"><span class="text-sm font-bold">Poster Design</span><span class="text-sm font-bold text-[#00ff88]">95%</span></div>
+                        <div class="h-2 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-fill h-full bg-gradient-to-r from-[#00ff88] to-[#00cc6a] rounded-full" style="--w:95%"></div></div>
+                    </div>
+                    <div class="reveal">
+                        <div class="flex justify-between mb-2"><span class="text-sm font-bold">Sports Graphics</span><span class="text-sm font-bold text-[#00ff88]">96%</span></div>
+                        <div class="h-2 bg-neutral-800 rounded-full overflow-hidden"><div class="skill-fill h-full bg-gradient-to-r from-[#00ff88] to-[#00cc6a] rounded-full" style="--w:96%"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal-right grid grid-cols-2 gap-4">
+                <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/20 text-center">
+                    <div class="text-4xl font-black text-[#00ff88] mb-1 counter" data-target="50">50+</div>
+                    <div class="text-xs text-neutral-500 uppercase tracking-wider font-semibold">Posters Done</div>
+                </div>
+                <div class="p-6 rounded-2xl border border-neutral-800 bg-neutral-900/20 text-center">
+                    <div class="text-4xl font-black text-[#00ff88] mb-1 counter" data-target="100">100+</div>
+                    <div class="text-xs text-neutral-500 uppercase tracking-wider font-semibold">Social Graphics</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="py-24 lg:py-32 border-t border-neutral-900 relative">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-16">
-        <div>
-          <span class="reveal text-xs font-bold text-[#00ff88] tracking-[0.3em] uppercase">Get In Touch</span>
-          <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">Let's Create<br><span class="text-gradient">Something Amazing</span></h2>
-          <p class="reveal text-neutral-400 mb-8">Have a project in mind? Let's bring your vision to life.</p>
-          <div class="reveal space-y-4 mb-8"><div class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center"><span class="iconify text-[#00ff88]" data-icon="lucide:mail" data-width="20"></span></div><div><div class="text-[10px] text-neutral-500">Email</div><div class="text-sm font-bold">rador@email.com</div></div></div><div class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center"><span class="iconify text-[#00ff88]" data-icon="lucide:phone" data-width="20"></span></div><div><div class="text-[10px] text-neutral-500">Phone</div><div class="text-sm font-bold">+880 1XXX-XXXXXX</div></div></div><div class="flex items-center gap-4"><div class="w-12 h-12 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center"><span class="iconify text-[#00ff88]" data-icon="lucide:map-pin" data-width="20"></span></div><div><div class="text-[10px] text-neutral-500">Location</div><div class="text-sm font-bold">Bangladesh</div></div></div></div>
-          <div class="reveal"><p class="text-xs text-neutral-600 mb-3">Follow Me</p><div class="flex gap-3"><a href="#" class="w-10 h-10 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center hover:text-[#00ff88]"><span class="iconify" data-icon="simple-icons:facebook" data-width="16"></span></a><a href="#" class="w-10 h-10 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center hover:text-[#00ff88]"><span class="iconify" data-icon="simple-icons:instagram" data-width="16"></span></a><a href="#" class="w-10 h-10 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center hover:text-[#00ff88]"><span class="iconify" data-icon="simple-icons:linkedin" data-width="16"></span></a></div></div>
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div>
+                <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">Portfolio</span>
+                <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4">Selected <span class="text-gradient">Projects</span></h2>
+            </div>
+            <div class="reveal flex flex-wrap gap-2.5">
+                <button class="filter-btn active px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full bg-[#00ff88] text-black transition-all duration-300" data-filter="all">✨ All</button>
+                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="football">⚽ Football</button>
+                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="cricket">🏏 Cricket</button>
+                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="automotive">🏎️ Auto</button>
+                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="f1">🏁 F1</button>
+                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="music">🎵 Music</button>
+                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="film">🎬 Film</button>
+                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="festival">🌙 Festival</button>
+                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="logo">🎨 Logo</button>
+            </div>
         </div>
-        <div class="reveal-right"><form id="contactForm" class="p-8 rounded-2xl border border-neutral-800 bg-neutral-900/30 space-y-5"><div class="grid sm:grid-cols-2 gap-5"><div><label class="text-[10px] font-bold text-neutral-500">Your Name</label><input type="text" class="w-full px-4 py-3 bg-neutral-800/50 border border-neutral-700 rounded-xl text-sm text-white focus:border-[#00ff88]" required></div><div><label class="text-[10px] font-bold text-neutral-500">Your Email</label><input type="email" class="w-full px-4 py-3 bg-neutral-800/50 border border-neutral-700 rounded-xl text-sm text-white focus:border-[#00ff88]" required></div></div><label class="text-[10px] font-bold text-neutral-500">Service Needed</label><select class="w-full px-4 py-3 bg-neutral-800/50 border border-neutral-700 rounded-xl text-sm text-white"><option>Select a service</option><option>Logo Design</option><option>Futbol Posters</option><option>Filmatic Posters</option><option>Social Media</option></select><label class="text-[10px] font-bold text-neutral-500">Your Message</label><textarea rows="4" class="w-full px-4 py-3 bg-neutral-800/50 border border-neutral-700 rounded-xl text-sm text-white resize-none" required></textarea><button type="submit" class="w-full py-3.5 bg-[#00ff88] text-black font-bold rounded-xl hover:bg-[#00cc6a] transition-all flex items-center justify-center gap-2">Send Message <span class="iconify" data-icon="lucide:send" data-width="16"></span></button></form></div>
-      </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid">
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/82170c06-3172-4881-b6c0-3d9559f0765c.jpg?auth_key=1880456908-59a3a6cb0d0b4fb09eb0e3436485fb7a-0-f7e81e5416a0431239ef5d5a34f2925f" data-title="Diego Maradona — The Golden Boy" data-cat="Football Poster" alt="Maradona" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Poster</div>
+                    <h3 class="text-lg font-bold">Diego Maradona</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Retro cinematic tribute artwork</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/486b5ab0-575d-482f-b89a-d799d41e4242.jpg?auth_key=1880456908-09670bcd350344c9a837cab38a2e77c3-0-0d6784670dd5156b1f68c3a486b14a68" data-title="Hamza Choudhury — Away Jersey" data-cat="Football Poster" alt="Hamza Away" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Poster</div>
+                    <h3 class="text-lg font-bold">Hamza — Away Jersey</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Red kit player profile design</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/5ebf2ecb-9cec-4cb4-86e6-e1b23bbaeb38.jpg?auth_key=1880460163-cc5415da00094971be2ba86d9086792f-0-076cdff35d2c8f11d065ed2b864c4cbb" data-title="Full-Time: Spurs 0-2 Man City — Haaland Brace" data-cat="Football Match Result" alt="Spurs vs Man City Result" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Match Result</div>
+                    <h3 class="text-lg font-bold">Spurs vs Man City</h3>
+                    <p class="text-sm text-neutral-500 mt-1">EPL full-time scorecard graphic</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/ffa44ea4-bc3b-4c30-9593-7863523b7ca7.jpg?auth_key=1880460163-8a2a122d350d43cbbdda034594d05ef4-0-d9c4d5a02da402078afa3f72ba87affe" data-title="Marco Reus — UCL Semi-Final: Dortmund vs PSG" data-cat="Football Match Day" alt="Reus Poster" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">UCL Poster</div>
+                    <h3 class="text-lg font-bold">Reus — Dortmund vs PSG</h3>
+                    <p class="text-sm text-neutral-500 mt-1">UCL Semi-Final Showdown</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/49b76a0d-080e-470d-8011-4ebcbc47c8a0.jpg?auth_key=1880460163-db5fe1902b034f2b819e360791beb62a-0-306b9b1e9c09e357cc04241aa8029f09" data-title="Mbappé — UCL: PSG vs Dortmund Tonight" data-cat="Football Match Day" alt="Mbappe Poster" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Match Day</div>
+                    <h3 class="text-lg font-bold">Mbappé — PSG vs Dortmund</h3>
+                    <p class="text-sm text-neutral-500 mt-1">UCL match day concept layout</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="cricket">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/d402cebd-a99f-4778-b695-fe4b09bf01a7.jpg?auth_key=1880459633-6a111cf2dcf74a3bbecaa846e1b5c0c5-0-1172d25fcdc61e629c7ae201e595609e" data-title="Retained — Khulna Tigers • BPL" data-cat="Cricket Graphics" alt="Retained" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Cricket Graphics</div>
+                    <h3 class="text-lg font-bold">Retained — Nasum</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Khulna Tigers • BPL</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="cricket">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/93cbb3e4-6dd5-4fb7-9177-e979863ddb77" data-title="Bangladesh Tour of India — 1st Test" data-cat="Cricket Graphics" alt="1st Test" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Cricket Graphics</div>
+                    <h3 class="text-lg font-bold">BD Tour of India — 1st Test</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Series match fixture layout</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="film">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="Film Review.jpg" data-title="The Substance — Film Review Concept" data-cat="Film Poster" alt="Film Review" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Film Poster</div>
+                    <h3 class="text-lg font-bold">The Substance</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Editorial film review layout</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="film">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="Casting Annoucement.jpg" data-title="Casting Announcement Artwork" data-cat="Film Poster" alt="Casting Announcement" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Film Poster</div>
+                    <h3 class="text-lg font-bold">Casting Announcement</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Cinematic cast reveal design</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="film">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="Dead poet society (Collage Post).jpg" data-title="Dead Poets Society — Collage Art" data-cat="Film Poster" alt="Dead Poets Society" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Film Poster</div>
+                    <h3 class="text-lg font-bold">Dead Poets Society</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Storytelling collage visual post</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="logo">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <div class="project-img w-full h-full bg-gradient-to-br from-[#00ff88]/10 via-neutral-900 to-[#00cc6a]/5 flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="w-28 h-28 rounded-3xl bg-[#00ff88]/15 border-2 border-[#00ff88]/30 flex items-center justify-center mx-auto mb-4">
+                                <span class="text-6xl font-black text-[#00ff88]">R</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Logo</h3>
+                            <p class="text-sm text-[#00ff88] font-semibold tracking-wider mt-1">BRANDING</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Logo Design</div>
+                    <h3 class="text-lg font-bold">Logo Branding</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Identity & brand mark design</p>
+                </div>
+            </div>
+
+            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="music">
+                <div class="relative aspect-[3/4] overflow-hidden">
+                    <img src="https://z-cdn-media.chatglm.cn/files/b0c015e6-213b-452e-9b84-aa5683c046d4.jpg?auth_key=1880458627-aa00107beb774124bc1d0422807d2616-0-c7b04d6f4d348df32c0c8ee1287d264f" data-title="অশ্রুকাব্য — Music Cover Art" data-cat="Music Cover" alt="অশ্রুকাব্য" class="project-img w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
+                        <div class="text-center">
+                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
+                            <p class="text-white font-bold">View Full</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Music Cover</div>
+                    <h3 class="text-lg font-bold">অশ্রুকাব্য (Oshrukabbo)</h3>
+                    <p class="text-sm text-neutral-500 mt-1">Digital streaming cover design</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
+</section>
 
-  <!-- ==================== FOOTER (updated text) ==================== -->
-  <footer class="border-t border-neutral-800 py-10">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="flex items-center gap-2"><div class="w-8 h-8 rounded-lg bg-[#00ff88] flex items-center justify-center text-black font-black text-sm">R</div><span class="font-bold">RADOR <span class="text-[#00ff88]">Designs</span></span></div>
-        <div class="text-center"><p class="text-sm text-neutral-400">All rights reserved to <strong class="text-neutral-200">Rodshi Ador</strong></p></div>
-        <div class="flex gap-6"><a href="#about" class="text-xs text-neutral-500 hover:text-[#00ff88]">ABOUT</a><a href="#projects" class="text-xs text-neutral-500 hover:text-[#00ff88]">PROJECTS</a><a href="#contact" class="text-xs text-neutral-500 hover:text-[#00ff88]">CONTACT</a></div>
-      </div>
+<section class="py-24 lg:py-32 relative overflow-hidden">
+    <div class="absolute inset-0">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00ff88]/5 rounded-full blur-[150px]"></div>
     </div>
-  </footer>
+    <div class="max-w-4xl mx-auto px-6 lg:px-8 relative text-center">
+        <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">Let's Work Together</span>
+        <h2 class="reveal text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mt-6 mb-8"><span class="text-gradient glow-green">IMPACTFUL</span></h2>
+        <p class="reveal text-xl text-neutral-400 font-light leading-relaxed mb-12 max-w-2xl mx-auto">Are you looking for a creative designer? Let me help you create visuals that leave a lasting impression.</p>
+        <div class="reveal flex flex-wrap justify-center gap-4">
+            <a href="#contact" class="group inline-flex items-center gap-3 px-10 py-5 bg-[#00ff88] text-black font-bold text-lg rounded-full hover:bg-[#00cc6a] transition-all duration-300 hover:shadow-xl hover:shadow-[#00ff88]/30 hover:-translate-y-1">Let's Talk <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="20"></span></a>
+            <a href="#projects" class="inline-flex items-center gap-3 px-10 py-5 border-2 border-[#00ff88]/30 text-[#00ff88] font-bold text-lg rounded-full hover:border-[#00ff88] hover:bg-[#00ff88]/5 transition-all duration-300 hover:-translate-y-1">View Projects</a>
+        </div>
+    </div>
+</section>
 
-  <!-- Toast -->
-  <div id="toast" class="toast fixed bottom-8 right-8 bg-[#00ff88] text-black px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2"><span class="iconify" data-icon="lucide:check-circle" data-width="18"></span><span class="text-sm font-bold">Message sent!</span></div>
+<div class="divider max-w-7xl mx-auto"></div>
 
-  <script src="script.js"></script>
+<section id="contact" class="py-24 lg:py-32 relative overflow-hidden">
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#00ff88]/3 rounded-full blur-[120px]"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
+        <div class="grid lg:grid-cols-2 gap-16">
+            <div>
+                <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">Get In Touch</span>
+                <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">Let's Create<br><span class="text-gradient">Something Amazing</span></h2>
+                <p class="reveal text-neutral-400 font-light leading-relaxed mb-12">Have a project in mind? I'd love to hear about it.</p>
+                <div class="reveal space-y-5 mb-12">
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-12 h-12 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center group-hover:border-[#00ff88]/30 transition-colors">
+                            <span class="iconify text-[#00ff88]" data-icon="lucide:mail" data-width="20"></span>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-neutral-500 tracking-wider uppercase">Email</div>
+                            <div class="text-sm font-bold">rador@email.com</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 group">
+                        <div class="w-12 h-12 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center group-hover:border-[#00ff88]/30 transition-colors">
+                            <span class="iconify text-[#00ff88]" data-icon="lucide:map-pin" data-width="20"></span>
+                        </div>
+                        <div>
+                            <div class="text-[10px] text-neutral-500 tracking-wider uppercase">Location</div>
+                            <div class="text-sm font-bold">Bangladesh</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal flex gap-3">
+                    <a href="https://www.facebook.com/rador009" target="_blank" class="w-11 h-11 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center text-neutral-400 hover:text-[#00ff88] hover:border-[#00ff88]/30 transition-all duration-300"><span class="iconify" data-icon="simple-icons:facebook" data-width="18"></span></a>
+                    <a href="#" class="w-11 h-11 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center text-neutral-400 hover:text-[#00ff88] hover:border-[#00ff88]/30 transition-all duration-300"><span class="iconify" data-icon="simple-icons:instagram" data-width="18"></span></a>
+                    <a href="#" class="w-11 h-11 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center text-neutral-400 hover:text-[#00ff88] hover:border-[#00ff88]/30 transition-all duration-300"><span class="iconify" data-icon="simple-icons:linkedin" data-width="18"></span></a>
+                </div>
+            </div>
+            <div class="reveal-right">
+                <form id="contactForm" class="space-y-4">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <input type="text" placeholder="Name" required class="w-full px-5 py-4 bg-neutral-900/50 border border-neutral-800 focus:border-[#00ff88]/50 rounded-xl text-white placeholder-neutral-500 outline-none transition-colors text-sm">
+                        <input type="email" placeholder="Email" required class="w-full px-5 py-4 bg-neutral-900/50 border border-neutral-800 focus:border-[#00ff88]/50 rounded-xl text-white placeholder-neutral-500 outline-none transition-colors text-sm">
+                    </div>
+                    <input type="text" placeholder="Subject" required class="w-full px-5 py-4 bg-neutral-900/50 border border-neutral-800 focus:border-[#00ff88]/50 rounded-xl text-white placeholder-neutral-500 outline-none transition-colors text-sm">
+                    <textarea placeholder="Message" rows="5" required class="w-full px-5 py-4 bg-neutral-900/50 border border-neutral-800 focus:border-[#00ff88]/50 rounded-xl text-white placeholder-neutral-500 outline-none transition-colors text-sm resize-none"></textarea>
+                    <button type="submit" class="w-full py-4 bg-[#00ff88] text-black font-bold rounded-xl hover:bg-[#00cc6a] transition-colors text-sm uppercase tracking-wider">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="py-12 border-t border-neutral-900 text-center text-sm text-neutral-600">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p>© 2026 RADOR. All rights reserved.</p>
+        <p class="flex items-center gap-1">Crafted with <span class="iconify text-[#00ff88]" data-icon="lucide:heart" data-width="14"></span> by RADOR</p>
+    </div>
+</footer>
+
+<div id="toast" class="toast fixed bottom-8 right-8 bg-[#00ff88] text-black px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3">
+    <span class="iconify" data-icon="lucide:check-circle" data-width="20"></span>
+    <span class="text-sm font-bold">Message sent successfully!</span>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

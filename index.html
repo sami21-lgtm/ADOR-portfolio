@@ -9,545 +9,90 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
-            theme: { 
-                extend: { 
-                    fontFamily: { 'inter': ['Inter', 'sans-serif'] }, 
-                    colors: { neon: '#00ff88', dark: { 900: '#0a0a0a', 800: '#111', 700: '#1a1a1a' } } 
-                } 
+            theme: {
+                extend: {
+                    fontFamily: { 'inter': ['Inter', 'sans-serif'] },
+                    colors: { neon: '#00ff88', dark: { 900: '#0a0a0a', 800: '#111', 700: '#1a1a1a' } }
+                }
             }
         }
     </script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#0a0a0a] text-white grid-bg overflow-x-hidden">
+<body class="bg-[#efe7da] text-neutral-900 grid-bg overflow-x-hidden">
+    <div class="cursor-dot hidden lg:block" id="cursorDot"></div>
+    <div class="cursor-ring hidden lg:block" id="cursorRing"></div>
 
-<div class="cursor-dot hidden lg:block" id="cursorDot"></div>
-<div class="cursor-ring hidden lg:block" id="cursorRing"></div>
-
-<div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose"> ✕ </button>
-    <button class="lightbox-nav lightbox-prev" id="lbPrev">‹</button>
-    <button class="lightbox-nav lightbox-next" id="lbNext">›</button>
-    <img id="lightboxImg" src="" alt="">
-    <div class="lightbox-info">
-        <div class="lightbox-cat" id="lightboxCat"></div>
-        <div class="lightbox-title" id="lightboxTitle"></div>
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">✕</button>
+        <button class="lightbox-nav lightbox-prev" id="lbPrev">‹</button>
+        <button class="lightbox-nav lightbox-next" id="lbNext">›</button>
+        <img id="lightboxImg" src="" alt="">
+        <div class="lightbox-info">
+            <div class="lightbox-cat" id="lightboxCat"></div>
+            <div class="lightbox-title" id="lightboxTitle"></div>
+        </div>
     </div>
-</div>
 
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex items-center justify-between h-20">
-            <a href="#home" class="flex items-center gap-2 group">
-                <div class="w-10 h-10 rounded-xl bg-[#00ff88] flex items-center justify-center text-black font-black text-lg group-hover:shadow-lg group-hover:shadow-[#00ff88]/25 transition-all duration-300">R</div>
-                <span class="text-xl font-bold tracking-tight">RADOR<span class="text-[#00ff88]">.</span></span>
-            </a>
-            <div class="hidden md:flex items-center gap-10">
-                <a href="#home" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors active">HOME</a>
-                <a href="#about" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">ABOUT</a>
-                <a href="#projects" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">PROJECTS</a>
-                <a href="#contact" class="nav-link text-sm font-medium text-neutral-300 hover:text-[#00ff88] transition-colors">CONTACT</a>
-            </div>
-            <div class="hidden md:flex items-center gap-4">
-                <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 bg-[#00ff88] rounded-full pulse-dot"></span>
-                    <span class="text-xs text-[#00ff88] font-medium">Available</span>
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#home" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 rounded-xl bg-[#00ff88] flex items-center justify-center text-black font-black text-lg group-hover:shadow-lg group-hover:shadow-[#00ff88]/25 transition-all duration-300">R</div>
+                    <span class="text-xl font-bold tracking-tight">RADOR<span class="text-[#00ff88]">.</span></span>
+                </a>
+                <div class="hidden md:flex items-center gap-10">
+                    <a href="#home" class="nav-link text-sm font-medium text-neutral-700 hover:text-[#00ff88] transition-colors active">HOME</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-neutral-700 hover:text-[#00ff88] transition-colors">ABOUT</a>
+                    <a href="#projects" class="nav-link text-sm font-medium text-neutral-700 hover:text-[#00ff88] transition-colors">PROJECTS</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-neutral-700 hover:text-[#00ff88] transition-colors">CONTACT</a>
                 </div>
-                <a href="#contact" class="px-6 py-2.5 bg-[#00ff88] text-black text-sm font-bold rounded-full hover:bg-[#00cc6a] transition-all duration-300 hover:shadow-lg hover:shadow-[#00ff88]/25">Hire Me</a>
+                <button id="mobileBtn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50">
+                    <span class="w-6 h-0.5 bg-neutral-900 transition-all duration-300" id="l1"></span>
+                    <span class="w-6 h-0.5 bg-neutral-900 transition-all duration-300" id="l2"></span>
+                    <span class="w-4 h-0.5 bg-neutral-900 transition-all duration-300 ml-auto" id="l3"></span>
+                </button>
             </div>
-            <button id="mobileBtn" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 z-50">
-                <span class="w-6 h-0.5 bg-white transition-all duration-300 origin-center" id="l1"></span>
-                <span class="w-6 h-0.5 bg-white transition-all duration-300" id="l2"></span>
-                <span class="w-4 h-0.5 bg-white transition-all duration-300 ml-auto origin-center" id="l3"></span>
-            </button>
         </div>
-    </div>
-    <div id="mobileMenu" class="md:hidden fixed inset-0 bg-[#0a0a0a]/98 backdrop-blur-xl z-40 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500">
-        <div class="flex flex-col items-center gap-8">
-            <a href="#home" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">HOME</a>
-            <a href="#about" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">ABOUT</a>
-            <a href="#projects" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">PROJECTS</a>
-            <a href="#contact" class="mobile-link text-4xl font-bold text-white hover:text-[#00ff88]">CONTACT</a>
-            <a href="#contact" class="mt-4 px-8 py-3 bg-[#00ff88] text-black font-bold rounded-full text-lg">Hire Me</a>
-        </div>
-    </div>
-</nav>
+    </nav>
 
-<section id="home" class="relative min-h-screen flex items-center overflow-hidden">
-    <div class="absolute inset-0">
-        <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#00ff88]/5 rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#00ff88]/3 rounded-full blur-[100px]"></div>
-    </div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none">
-        <div class="text-outline text-[20vw] font-black tracking-tighter whitespace-nowrap opacity-20">RADOR</div>
-    </div>
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20 relative z-10">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div>
-                <div class="reveal" style="transition-delay:.1s">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#00ff88]/20 bg-[#00ff88]/5 mb-8">
-                        <span class="w-2 h-2 bg-[#00ff88] rounded-full pulse-dot"></span>
-                        <span class="text-xs font-semibold text-[#00ff88] tracking-wider uppercase">Graphic Designer</span>
+    <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full pt-28 pb-20 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div>
+                    <h1 class="reveal text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[.95] tracking-tight mb-4">It's<br><span class="text-gradient glow-green">RADOR</span></h1>
+                    <p class="reveal text-xl sm:text-2xl font-light text-neutral-600 mb-4">Graphic Designer &<br><span class="text-neutral-900 font-medium">Visual Storyteller</span></p>
+                    <div class="reveal flex flex-wrap gap-4 mt-8">
+                        <a href="#projects" class="group inline-flex items-center gap-3 px-8 py-4 bg-[#00ff88] text-black font-bold rounded-full hover:bg-[#00cc6a] transition-all">VIEW PROJECTS</a>
                     </div>
                 </div>
-                <h1 class="reveal text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black leading-[.95] tracking-tight mb-4" style="transition-delay:.2s">It's<br><span class="text-gradient glow-green">RADOR</span></h1>
-                <p class="reveal text-xl sm:text-2xl font-light text-neutral-400 mb-4" style="transition-delay:.3s">Graphic Designer &<br><span class="text-white font-medium">Visual Storyteller</span></p>
-                <p class="reveal text-neutral-500 font-light leading-relaxed max-w-lg mb-10" style="transition-delay:.35s">Specializing in poster design, sports graphics, cricket & football visuals, music covers, and creative designs.</p>
-                <div class="reveal flex flex-wrap gap-3 mb-10" style="transition-delay:.4s">
-                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Poster</span>
-                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Cricket</span>
-                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Football</span>
-                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Music</span>
-                    <span class="px-4 py-1.5 rounded-full border border-[#00ff88]/20 text-[#00ff88] text-xs font-semibold">Film</span>
-                </div>
-                <div class="reveal flex flex-wrap gap-4" style="transition-delay:.45s">
-                    <a href="#projects" class="group inline-flex items-center gap-3 px-8 py-4 bg-[#00ff88] text-black font-bold rounded-full hover:bg-[#00cc6a] transition-all duration-300 hover:shadow-xl hover:shadow-[#00ff88]/25 hover:-translate-y-0.5">VIEW PROJECTS <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="18"></span></a>
-                    <a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 border border-neutral-700 hover:border-[#00ff88]/50 text-white font-medium rounded-full transition-all duration-300 hover:-translate-y-0.5">Contact <span class="iconify" data-icon="lucide:message-circle" data-width="18"></span></a>
-                </div>
-                <div class="reveal flex items-center gap-5 mt-12" style="transition-delay:.5s">
-                    <span class="text-xs text-neutral-600 tracking-wider uppercase">Follow</span>
-                    <div class="w-8 h-px bg-neutral-700"></div>
-                    <a href="https://www.facebook.com/rador009" target="_blank" class="text-neutral-500 hover:text-[#00ff88] transition-colors"><span class="iconify" data-icon="simple-icons:facebook" data-width="18"></span></a>
-                    <a href="#" class="text-neutral-500 hover:text-[#00ff88] transition-colors"><span class="iconify" data-icon="simple-icons:instagram" data-width="18"></span></a>
-                    <a href="#" class="text-neutral-500 hover:text-[#00ff88] transition-colors"><span class="iconify" data-icon="simple-icons:linkedin" data-width="18"></span></a>
-                </div>
-            </div>
-            <div class="reveal-right relative">
-                <div class="relative">
-                    <div class="relative rounded-3xl overflow-hidden border border-neutral-800 bg-neutral-900/50 p-3">
+
+                <div class="reveal-right relative">
+                    <div class="relative rounded-3xl overflow-hidden border border-neutral-300 bg-white/50 p-3">
                         <div class="grid grid-cols-2 gap-2.5">
-                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(0)"><img src="Squad Annoucement.jpg" alt="Squad Announcement" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">SQUAD</span></div></div>
-                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(1)"><img src="Signing Alert (Imad).jpg" alt="Signing Alert" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">SIGNING</span></div></div>
-                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(2)"><img src="Retaing News (Nasum).jpg" alt="Retaining News" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">RETAINED</span></div></div>
-                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(3)"><img src="Match Result.jpg" alt="Match Result" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">RESULT</span></div></div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(0)">
+                                <img src="f1_poster.jpg" alt="F1 Poster" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88]">F1 CLASSIC</span></div>
+                            </div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(1)">
+                                <img src="gt3_r_poster.jpg" alt="GT3 R Poster" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88]">GT3 R</span></div>
+                            </div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(2)">
+                                <img src="hamza_classic.jpg" alt="Hamza Classic" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88]">HAMZA CLASSIC</span></div>
+                            </div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(3)">
+                                <img src="Match Result.jpg" alt="Match Result" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88]">LATEST</span></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="absolute -top-4 -right-4 bg-[#0a0a0a] border border-[#00ff88]/30 rounded-2xl px-4 py-3 opacity-90 glow-box">
-                        <div class="flex items-center gap-2"><span class="iconify text-[#00ff88]" data-icon="lucide:sparkles" data-width="16"></span><span class="text-xs font-bold text-[#00ff88]">Premium Work</span></div>
-                    </div>
-                    <div class="absolute -bottom-4 -left-4 bg-[#0a0a0a] border border-[#00ff88]/30 rounded-2xl px-4 py-3 opacity-90 glow-box">
-                        <div class="flex items-center gap-2"><span class="iconify text-yellow-400" data-icon="lucide:star" data-width="16"></span><span class="text-xs font-bold">5.0 Starred</span></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span class="text-[10px] text-neutral-600 tracking-[.3em] uppercase">Scroll Down</span>
-        <div class="w-5 h-8 rounded-full border border-neutral-700 flex justify-center pt-1.5">
-            <div class="w-1 h-2 bg-[#00ff88] rounded-full animate-bounce"></div>
-        </div>
-    </div>
-</section>
+    </section>
 
-<div class="py-6 border-y border-neutral-800/50 overflow-hidden bg-[#00ff88]/[.02]">
-    <div class="flex whitespace-nowrap marquee-track">
-        <span class="text-4xl font-black text-neutral-800 mx-8">FOOTBALL POSTER</span><span class="text-[#00ff88] mx-3"> ◆ </span>
-        <span class="text-4xl font-black text-neutral-800 mx-8">CRICKET GRAPHICS</span><span class="text-[#00ff88] mx-3"> ◆ </span>
-        <span class="text-4xl font-black text-neutral-800 mx-8">MATCH DAY</span><span class="text-[#00ff88] mx-3"> ◆ </span>
-        <span class="text-4xl font-black text-neutral-800 mx-8">MUSIC COVER</span><span class="text-[#00ff88] mx-3"> ◆ </span>
-        <span class="text-4xl font-black text-neutral-800 mx-8">SPORTS DESIGN</span><span class="text-[#00ff88] mx-3"> ◆ </span>
-        <span class="text-4xl font-black text-neutral-800 mx-8">FESTIVAL</span><span class="text-[#00ff88] mx-3"> ◆ </span>
-    </div>
-</div>
-
-<section id="about" class="py-24 lg:py-32 relative">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-16 items-start">
-            <div class="reveal-left relative sticky top-28">
-                <div class="relative rounded-3xl overflow-hidden aspect-[3/4] max-w-md mx-auto">
-                    <img src="9b6d1473-5558-4b2f-ade6-4beef5b97ea1.jpg" alt="Ador" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-60"></div>
-                </div>
-                <div class="absolute -inset-4 rounded-3xl border border-[#00ff88]/10 pointer-events-none"></div>
-                <div class="absolute -bottom-6 -right-6 bg-[#00ff88] rounded-2xl p-5 shadow-xl">
-                    <div class="text-3xl font-black text-black">3+</div>
-                    <div class="text-xs font-bold text-black/70">Years Exp.</div>
-                </div>
-            </div>
-            <div>
-                <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">About Me</span>
-                <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">Cinematic Storytelling<br><span class="text-gradient">Through Design</span></h2>
-                
-                <p class="reveal text-neutral-300 font-normal leading-relaxed mb-4">
-                    I’m <strong class="text-white font-semibold">Ador</strong>, an EEE student and visual designer based in Dhaka, passionate about cinematic storytelling through design. My work focuses on poster design, sports media visuals, and editorial-style digital creatives that combine emotion, typography, and strong composition.
-                </p>
-                <p class="reveal text-neutral-400 font-light leading-relaxed mb-4">
-                    Over time, I’ve worked with football and cricket-based media platforms such as <strong class="text-white font-medium">Futbol</strong> and <strong class="text-white font-medium">Howzat</strong>, creating engaging social media visuals designed to capture energy, narrative, and audience attention. I currently serve as the <a href="https://rads.gt.tc/?i=2" target="_blank" class="text-[#00ff88] font-medium underline hover:text-white transition-colors">Design Head at RADS</a>, contributing to the visual direction and branding of the platform through modern, aesthetically driven design solutions.
-                </p>
-                <p class="reveal text-neutral-400 font-light leading-relaxed mb-8">
-                    Beyond design, my background in Electrical and Electronic Engineering helps shape a structured and analytical approach to creativity — balancing visual experimentation with purposeful design thinking.
-                </p>
-            </div>
-        </div>
-
-        <div class="mt-32">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">What I Do</span>
-                <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">My <span class="text-gradient">Services</span></h2>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
-                <div class="reveal card-hover p-8 rounded-2xl border border-neutral-800 bg-neutral-900/30 group">
-                    <div class="w-14 h-14 rounded-2xl bg-[#00ff88]/10 flex items-center justify-center mb-6 group-hover:bg-[#00ff88]/20 transition-colors">
-                        <span class="iconify text-[#00ff88]" data-icon="lucide:image" data-width="28"></span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Poster Design</h3>
-                    <p class="text-neutral-400 font-light text-sm">Eye-catching poster designs for sports, automotive, music, film, and campaigns.</p>
-                </div>
-                <div class="reveal card-hover p-8 rounded-2xl border border-neutral-800 bg-neutral-900/30 group">
-                    <div class="w-14 h-14 rounded-2xl bg-[#00ff88]/10 flex items-center justify-center mb-6 group-hover:bg-[#00ff88]/20 transition-colors">
-                        <span class="iconify text-[#00ff88]" data-icon="lucide:trophy" data-width="28"></span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Cricket Graphics</h3>
-                    <p class="text-neutral-400 font-light text-sm">Squad announcements, match day, signing alerts & match result graphics.</p>
-                </div>
-                <div class="reveal card-hover p-8 rounded-2xl border border-neutral-800 bg-neutral-900/30 group">
-                    <div class="w-14 h-14 rounded-2xl bg-[#00ff88]/10 flex items-center justify-center mb-6 group-hover:bg-[#00ff88]/20 transition-colors">
-                        <span class="iconify text-[#00ff88]" data-icon="lucide:circle-dot" data-width="28"></span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Football Visuals</h3>
-                    <p class="text-neutral-400 font-light text-sm">Match day concepts, player profiles, line-ups, and transfer graphics.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="projects" class="py-24 lg:py-32 border-t border-neutral-900 relative">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div>
-                <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">Portfolio</span>
-                <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4">Selected <span class="text-gradient">Projects</span></h2>
-            </div>
-            <div class="reveal flex flex-wrap gap-2.5">
-                <button class="filter-btn active px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full bg-[#00ff88] text-black transition-all duration-300" data-filter="all">✨ All</button>
-                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="football">⚽ Football</button>
-                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="cricket">🏏 Cricket</button>
-                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="branding">🎬 Film / Branding</button>
-                <button class="filter-btn px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold rounded-full border border-neutral-700 text-neutral-400 hover:text-white transition-all duration-300" data-filter="music">🎵 Music</button>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projectsGrid">
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Match day.jpg" data-title="Spurs vs Man City Result" data-cat="Football Visuals" alt="Match day" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Visuals</div>
-                    <h3 class="text-lg font-bold">Spurs vs Man City</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Retro cinematic tribute artwork</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Maradona.jpg" data-title="Diego Maradona Tribute Poster" data-cat="Football Visuals" alt="Maradona Poster" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Visuals</div>
-                    <h3 class="text-lg font-bold">Maradona Golden Era</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Legendary tribute concept design</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="HAMZA_HOME.jpg" data-title="Hamza Choudhury - Home Version" data-cat="Football Visuals" alt="Hamza Home" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Visuals</div>
-                    <h3 class="text-lg font-bold">Hamza Choudhury (Home)</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Premium player match profile graphic</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="cricket">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Match.jpg" data-title="Bangladesh Tour of India" data-cat="Cricket Graphics" alt="Match" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Cricket Graphics</div>
-                    <h3 class="text-lg font-bold">Bangladesh Tour of India</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Retro cinematic tribute artwork</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="music">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="অশ্রুকাব্য (1).jpg" data-title="Music Cover Oshrukabbo" data-cat="Music Cover" alt="Music Cover" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Music Cover</div>
-                    <h3 class="text-lg font-bold">অশ্রুকাব্য (Oshrukabbo)</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Retro cinematic tribute artwork</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Match Day Poster REUS.jpg" data-title="Reus Match Day Poster" data-cat="Football Visuals" alt="Football Poster" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Visuals</div>
-                    <h3 class="text-lg font-bold">Match Day Poster REUS</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Retro cinematic tribute artwork</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="HAMZA_Classic Version.jpg" data-title="Hamza Choudhury - Classic Version" data-cat="Football Visuals" alt="Hamza Classic" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Visuals</div>
-                    <h3 class="text-lg font-bold">Hamza Choudhury (Classic)</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Elegant editorial sports aesthetic</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="HAMZA_AWAY.jpg" data-title="Hamza Choudhury - Away Version" data-cat="Football Visuals" alt="Hamza Away" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Visuals</div>
-                    <h3 class="text-lg font-bold">Hamza Choudhury (Away)</h3>
-                    <p class="text-sm text-neutral-500 mt-1">High-impact player identity card</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="branding">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Filmtic cover(Pic).jpg" data-title="Filmtic Cover Concept" data-cat="Film Poster" alt="Filmtic Cover" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Film Poster</div>
-                    <h3 class="text-lg font-bold">Filmtic Cover</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Modern visual media branding concept</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="branding">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Casting Annoucement.jpg" data-title="Casting Production Announcement" data-cat="Film Branding" alt="Casting Announcement" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Film Branding</div>
-                    <h3 class="text-lg font-bold">Casting Announcement</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Creative casting production visual</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="branding">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Dead poet society (Collage Post).jpg" data-title="Dead Poets Society Collage Artwork" data-cat="Film Poster" alt="Dead Poets Society Collage" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Film Poster</div>
-                    <h3 class="text-lg font-bold">Dead Poets Society</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Cinematic collage post design layout</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Match Day Poster Mbappe.jpg" data-title="Mbappe Match Day Poster" data-cat="Football Visuals" alt="Football Visuals" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Visuals</div>
-                    <h3 class="text-lg font-bold">Match Day Poster Mbappe</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Retro cinematic tribute artwork</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Match Result (1).jpg" data-title="Match Result" data-cat="Football Visuals" alt="Match Result" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Visuals</div>
-                    <h3 class="text-lg font-bold">Match Result</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Retro cinematic tribute artwork</p>
-                </div>
-            </div>
-
-            <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900/30 cursor-pointer" data-category="football">
-                <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="Match day result.jpg" data-title="Match Day Result" data-cat="Football Visuals" alt="Match Day Result" class="project-img w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a0a0a]/70 backdrop-blur-sm flex items-center justify-center">
-                        <div class="text-center">
-                            <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
-                            <p class="text-white font-bold">View Full</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="text-[10px] font-bold text-[#00ff88] tracking-[.2em] uppercase mb-1">Football Visuals</div>
-                    <h3 class="text-lg font-bold">Match Day Result</h3>
-                    <p class="text-sm text-neutral-500 mt-1">Retro cinematic tribute artwork</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-24 lg:py-32 relative overflow-hidden">
-    <div class="absolute inset-0">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#00ff88]/5 rounded-full blur-[150px]"></div>
-    </div>
-    <div class="max-w-4xl mx-auto px-6 lg:px-8 relative text-center">
-        <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">Let's Work Together</span>
-        <h2 class="reveal text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight mt-6 mb-8"><span class="text-gradient glow-green">IMPACTFUL</span></h2>
-        <p class="reveal text-xl text-neutral-400 font-light leading-relaxed mb-12 max-w-2xl mx-auto">Are you looking for a creative designer? Let me help you create visuals that leave a lasting impression.</p>
-        <div class="reveal flex flex-wrap justify-center gap-4">
-            <a href="#contact" class="group inline-flex items-center gap-3 px-10 py-5 bg-[#00ff88] text-black font-bold text-lg rounded-full hover:bg-[#00cc6a] transition-all duration-300 hover:shadow-xl hover:shadow-[#00ff88]/30 hover:-translate-y-1">Let's Talk <span class="iconify group-hover:translate-x-1 transition-transform" data-icon="lucide:arrow-right" data-width="20"></span></a>
-            <a href="#projects" class="inline-flex items-center gap-3 px-10 py-5 border-2 border-[#00ff88]/30 text-[#00ff88] font-bold text-lg rounded-full hover:border-[#00ff88] hover:bg-[#00ff88]/5 transition-all duration-300 hover:-translate-y-1">View Projects</a>
-        </div>
-    </div>
-</section>
-
-<div class="divider max-w-7xl mx-auto"></div>
-
-<section id="contact" class="py-24 lg:py-32 relative overflow-hidden">
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#00ff88]/3 rounded-full blur-[120px]"></div>
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
-        <div class="grid lg:grid-cols-2 gap-16">
-            <div>
-                <span class="reveal text-xs font-bold text-[#00ff88] tracking-[.3em] uppercase">Get In Touch</span>
-                <h2 class="reveal text-4xl lg:text-5xl font-black tracking-tight mt-4 mb-6">Let's Create<br><span class="text-gradient">Something Amazing</span></h2>
-                <p class="reveal text-neutral-400 font-light leading-relaxed mb-12">Have a project in mind? I'd love to hear about it.</p>
-                <div class="reveal space-y-5 mb-12">
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-12 h-12 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center group-hover:border-[#00ff88]/30 transition-colors">
-                            <span class="iconify text-[#00ff88]" data-icon="lucide:mail" data-width="20"></span>
-                        </div>
-                        <div>
-                            <div class="text-[10px] text-neutral-500 tracking-wider uppercase">Email</div>
-                            <a href="mailto:rodshiador@gmail.com" class="text-sm font-bold hover:text-[#00ff88] transition-colors">rodshiador@gmail.com</a>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4 group">
-                        <div class="w-12 h-12 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center group-hover:border-[#00ff88]/30 transition-colors">
-                            <span class="iconify text-[#00ff88]" data-icon="lucide:map-pin" data-width="20"></span>
-                        </div>
-                        <div>
-                            <div class="text-[10px] text-neutral-500 tracking-wider uppercase">Location</div>
-                            <div class="text-sm font-bold">Bangladesh</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="reveal flex gap-3">
-                    <a href="https://www.facebook.com/rador009" target="_blank" class="w-11 h-11 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center text-neutral-400 hover:text-[#00ff88] hover:border-[#00ff88]/30 transition-all duration-300"><span class="iconify" data-icon="simple-icons:facebook" data-width="18"></span></a>
-                    <a href="mailto:rodshiador@gmail.com" class="w-11 h-11 rounded-xl border border-neutral-800 bg-neutral-900/50 flex items-center justify-center text-neutral-400 hover:text-[#00ff88] hover:border-[#00ff88]/30 transition-all duration-300"><span class="iconify" data-icon="lucide:mail" data-width="18"></span></a>
-                </div>
-            </div>
-            <div class="reveal-right">
-                <form id="contactForm" class="space-y-4">
-                    <div class="grid sm:grid-cols-2 gap-4">
-                        <input type="text" placeholder="Name" required class="w-full px-5 py-4 bg-neutral-900/50 border border-neutral-800 focus:border-[#00ff88]/50 rounded-xl text-white placeholder-neutral-500 outline-none transition-colors text-sm">
-                        <input type="email" placeholder="Email" required class="w-full px-5 py-4 bg-neutral-900/50 border border-neutral-800 focus:border-[#00ff88]/50 rounded-xl text-white placeholder-neutral-500 outline-none transition-colors text-sm">
-                    </div>
-                    <input type="text" placeholder="Subject" required class="w-full px-5 py-4 bg-neutral-900/50 border border-neutral-800 focus:border-[#00ff88]/50 rounded-xl text-white placeholder-neutral-500 outline-none transition-colors text-sm">
-                    <textarea placeholder="Message" rows="5" required class="w-full px-5 py-4 bg-neutral-900/50 border border-neutral-800 focus:border-[#00ff88]/50 rounded-xl text-white placeholder-neutral-500 outline-none transition-colors text-sm resize-none"></textarea>
-                    <button type="submit" class="w-full py-4 bg-[#00ff88] text-black font-bold rounded-xl hover:bg-[#00cc6a] transition-colors text-sm uppercase tracking-wider">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="py-12 border-t border-neutral-900 text-center text-sm text-neutral-600">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p>© 2026 RADOR. All rights reserved.</p>
-        <p class="flex items-center gap-1">Crafted with <span class="iconify text-[#00ff88]" data-icon="lucide:heart" data-width="14"></span> by RADOR</p>
-    </div>
-</footer>
-
-<div id="toast" class="toast fixed bottom-8 right-8 bg-[#00ff88] text-black px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3">
-    <span class="iconify" data-icon="lucide:check-circle" data-width="20"></span>
-    <span class="text-sm font-bold">Message sent successfully!</span>
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

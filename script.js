@@ -1,4 +1,4 @@
-// Lightbox Gallery Core Logic
+
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxTitle = document.getElementById('lightboxTitle');
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     buildGallery();
 });
 
-// Custom Premium Smooth Cursor Tracking
+
 const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
 
@@ -86,7 +86,7 @@ document.querySelectorAll('a, button, .project-card, .cursor-pointer, .experienc
     });
 });
 
-// Scroll Dynamic Header and Nav Active Link Update
+
 const nav = document.getElementById('navbar');
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-link');
@@ -118,7 +118,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Scroll Reveal Observer Setup
+
 const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
 function checkReveal() {
     reveals.forEach(r => {
@@ -136,7 +136,7 @@ function checkReveal() {
 window.addEventListener('scroll', checkReveal);
 window.addEventListener('load', checkReveal);
 
-// Mobile Responsive Navigation Hamburger Trigger
+
 const mBtn = document.getElementById('mobileBtn');
 const mMenu = document.getElementById('mobileMenu');
 const l1 = document.getElementById('l1');
@@ -175,7 +175,7 @@ document.querySelectorAll('.mobile-link').forEach(link => {
     });
 });
 
-// Interactive Portfolio Filter System
+
 const fBtns = document.querySelectorAll('.filter-btn');
 const pItems = document.querySelectorAll('#projectsGrid > div');
 
@@ -209,7 +209,7 @@ fBtns.forEach(btn => {
     });
 });
 
-// Contact Form Notification Mechanism
+
 document.getElementById('contactForm').addEventListener('submit', e => {
     e.preventDefault();
     document.getElementById('toast').classList.add('show');

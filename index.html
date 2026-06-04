@@ -69,6 +69,7 @@
         </div>
     </div>
 </nav>
+
 <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
     <div class="absolute inset-0">
         <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#00ff88]/10 rounded-full blur-[120px]"></div>
@@ -128,13 +129,16 @@
             </div>
         </div>
     </div>
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span class="text-[10px] text-neutral-600 tracking-[.3em] uppercase">Scroll Down</span>
-        <div class="w-5 h-8 rounded-full border border-neutral-400 flex justify-center pt-1.5">
+    
+    <!-- CHANGED: Fixed Scroll Down Layout to prevent layout breaking or hiding -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 w-full max-w-[200px] text-center">
+        <span class="text-[10px] text-neutral-600 tracking-[.15em] font-bold uppercase whitespace-nowrap">Scroll Down</span>
+        <div class="w-5 h-8 rounded-full border border-neutral-400 flex justify-center pt-1.5 bg-[#efe7da]">
             <div class="w-1 h-2 bg-[#00ab5b] rounded-full animate-bounce"></div>
         </div>
     </div>
 </section>
+
 <div class="py-6 border-y border-neutral-300 overflow-hidden bg-[#00ff88]/[.05]">
     <div class="flex whitespace-nowrap marquee-track">
         <span class="text-4xl font-black text-neutral-800 mx-8">FOOTBALL POSTER</span><span class="text-[#00ab5b] mx-3"> ◆ </span>

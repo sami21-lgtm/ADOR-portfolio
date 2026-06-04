@@ -20,7 +20,7 @@
         }
     </script>
     <script>
-        // Inline script to prevent screen flash on reload
+       
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -150,7 +150,7 @@
         </div>
     </div>
     
-    <!-- Fixed Scroll Down Component -->
+   
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 w-full max-w-[200px] text-center">
         <span class="text-[10px] text-neutral-600 dark:text-neutral-400 tracking-[.15em] font-bold uppercase whitespace-nowrap">Scroll Down</span>
         <div class="w-5 h-8 rounded-full border border-neutral-400 flex justify-center pt-1.5 bg-[#efe7da] dark:bg-neutral-950">

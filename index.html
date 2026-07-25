@@ -20,7 +20,6 @@
         }
     </script>
     <script>
-       
         if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         } else {
@@ -42,7 +41,6 @@
         <div class="lightbox-title" id="lightboxTitle"></div>
     </div>
 </div>
-
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-[#efe7da]/80 dark:bg-neutral-950/80 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
@@ -57,12 +55,10 @@
                 <a href="#contact" class="nav-link text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:text-[#00ab5b] transition-colors">CONTACT</a>
             </div>
             <div class="flex items-center gap-4">
-                <!-- Professional Theme Toggle Button -->
                 <button id="themeToggle" class="w-10 h-10 rounded-xl border border-neutral-300 dark:border-neutral-800 flex items-center justify-center text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200/50 dark:hover:bg-neutral-900 transition-all shadow-sm">
                     <span class="iconify block dark:hidden" data-icon="lucide:moon" data-width="20"></span>
                     <span class="iconify hidden dark:block" data-icon="lucide:sun" data-width="20"></span>
                 </button>
-
                 <div class="hidden md:flex items-center gap-4">
                     <div class="flex items-center gap-2">
                         <span class="w-2 h-2 bg-[#00ff88] rounded-full pulse-dot"></span>
@@ -131,10 +127,9 @@
             <div class="reveal-right relative">
                 <div class="relative">
                     <div class="relative rounded-3xl overflow-hidden border border-neutral-300 dark:border-neutral-800 bg-white/50 dark:bg-neutral-900/40 p-3 shadow-lg">
-                        <!-- Hero Image Grid -->
                         <div class="grid grid-cols-2 gap-2.5">
                             <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(0)"><img src="Squad Annoucement.jpg" alt="Squad Announcement" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">SQUAD</span></div></div>
-                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(1)"><img src="F1 Poster (1).jpg" alt="F1 Poster" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">F1 POSTER</span></div></div>
+                            <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(1)"><img src="Nissan GT-R 35.jpg" alt="Nissan GT-R 35 Poster" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">GT-R 35</span></div></div>
                             <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(2)"><img src="GT3 (1).jpg" alt="GT3 RS" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">GT3 RS</span></div></div>
                             <div class="relative rounded-2xl overflow-hidden aspect-[3/4] group cursor-pointer" onclick="openLightboxByIndex(3)"><img src="HAMZA_Classic Version (1).jpg" alt="Hamza Classic" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"><div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2"><span class="text-[10px] font-bold text-[#00ff88] tracking-wider">CLASSIC</span></div></div>
                         </div>
@@ -149,8 +144,6 @@
             </div>
         </div>
     </div>
-    
-   
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 w-full max-w-[200px] text-center">
         <span class="text-[10px] text-neutral-600 dark:text-neutral-400 tracking-[.15em] font-bold uppercase whitespace-nowrap">Scroll Down</span>
         <div class="w-5 h-8 rounded-full border border-neutral-400 flex justify-center pt-1.5 bg-[#efe7da] dark:bg-neutral-950">
@@ -197,8 +190,23 @@
                 <p class="reveal text-neutral-600 dark:text-neutral-400 font-light leading-relaxed mb-8">
                     Beyond design, my background in Electrical and Electronic Engineering helps shape a structured and analytical approach to creativity — balancing visual experimentation with purposeful design thinking.
                 </p>
+
+                <!-- Added Skills Sector with Canva Logo -->
+                <div class="reveal mt-10 pt-8 border-t border-neutral-300 dark:border-neutral-800">
+                    <span class="text-xs font-bold text-[#00ab5b] tracking-[.3em] uppercase block mb-4">Skills</span>
+                    <div class="flex items-center gap-4 p-4 rounded-2xl border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-neutral-900/40 shadow-sm max-w-xs hover:border-[#00C4CC]/50 transition-all duration-300">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#00C4CC] to-[#7D2AE8] flex items-center justify-center text-white font-extrabold italic text-lg shadow-md">
+                            Canva
+                        </div>
+                        <div>
+                            <h4 class="text-base font-bold text-neutral-900 dark:text-white">Canva Specialist</h4>
+                            <p class="text-xs text-neutral-600 dark:text-neutral-400">Visual & Social Design</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
         <div class="mt-32">
             <div class="text-center max-w-2xl mx-auto mb-16">
                 <span class="reveal text-xs font-bold text-[#00ab5b] tracking-[.3em] uppercase">What I Do</span>
@@ -265,10 +273,10 @@
                 </div>
             </div>
             
-            <!-- Project 2 -->
+            <!-- Project 2 (Updated with Nissan GT-R 35 Poster) -->
             <div class="reveal project-card group rounded-2xl overflow-hidden border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-neutral-900/40 cursor-pointer shadow-sm" data-category="branding">
                 <div class="relative aspect-[3/4] overflow-hidden">
-                    <img src="F1 Poster (1).jpg" data-title="F1 Drivers Special Edition" data-cat="Automotive Poster" alt="F1 Poster" class="project-img w-full h-full object-cover">
+                    <img src="Nissan GT-R 35.jpg" data-title="Nissan GT-R R35 Poster" data-cat="Automotive Poster" alt="Nissan GT-R 35" class="project-img w-full h-full object-cover">
                     <div class="project-overlay absolute inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center">
                         <div class="text-center">
                             <span class="iconify text-[#00ff88] mb-2" data-icon="lucide:expand" data-width="28"></span>
@@ -278,8 +286,8 @@
                 </div>
                 <div class="p-5">
                     <div class="text-[10px] font-bold text-[#00ab5b] tracking-[.2em] uppercase mb-1">Automotive Poster</div>
-                    <h3 class="text-lg font-bold text-neutral-900 dark:text-white">F1 Drivers Special Edition</h3>
-                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">Hamilton, Verstappen & Leclerc Cinematic Art</p>
+                    <h3 class="text-lg font-bold text-neutral-900 dark:text-white">Nissan GT-R R35</h3>
+                    <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-1">High-performance Godzilla edition poster art</p>
                 </div>
             </div>
 

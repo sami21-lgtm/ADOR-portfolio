@@ -1,4 +1,3 @@
-
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
 const lightboxTitle = document.getElementById('lightboxTitle');
@@ -62,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     buildGallery();
 });
 
-
 const dot = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
 
@@ -85,7 +83,6 @@ document.querySelectorAll('a, button, .project-card, .cursor-pointer, .experienc
         ring.style.background = 'transparent';
     });
 });
-
 
 const nav = document.getElementById('navbar');
 const sections = document.querySelectorAll('section');
@@ -118,7 +115,6 @@ window.addEventListener('scroll', () => {
     });
 });
 
-
 const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
 function checkReveal() {
     reveals.forEach(r => {
@@ -133,9 +129,9 @@ function checkReveal() {
         }
     });
 }
+
 window.addEventListener('scroll', checkReveal);
 window.addEventListener('load', checkReveal);
-
 
 const mBtn = document.getElementById('mobileBtn');
 const mMenu = document.getElementById('mobileMenu');
@@ -175,7 +171,6 @@ document.querySelectorAll('.mobile-link').forEach(link => {
     });
 });
 
-
 const fBtns = document.querySelectorAll('.filter-btn');
 const pItems = document.querySelectorAll('#projectsGrid > div');
 
@@ -208,7 +203,6 @@ fBtns.forEach(btn => {
         });
     });
 });
-
 
 document.getElementById('contactForm').addEventListener('submit', e => {
     e.preventDefault();
